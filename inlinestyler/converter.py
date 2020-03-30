@@ -35,8 +35,10 @@ class Conversion(object):
                     if element.get("href").lower().find("http://", 0) < 0:
                         parsed_url = urlparse.urlparse(sourceURL)
                         csspath = urlparse.urljoin(parsed_url.scheme + "://" + parsed_url.hostname, csspath)
-
-                css_content = requests.get(csspath).text
+                if csspath.startswith("http"):
+                  css_content = requests.get(csspath).text
+                else:
+                    css_content = open(csspath, "r")
                 aggregate_css += ''.join(css_content)
 
                 element.getparent().remove(element)
