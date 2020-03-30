@@ -36,7 +36,7 @@ class Conversion(object):
                         parsed_url = urlparse.urlparse(sourceURL)
                         csspath = urlparse.urljoin(parsed_url.scheme + "://" + parsed_url.hostname, csspath)
                 if csspath.startswith("http"):
-                  css_content = requests.get(csspath).text
+                    css_content = requests.get(csspath).text
                 else:
                     css_content = open(csspath, "r")
                 aggregate_css += ''.join(css_content)
